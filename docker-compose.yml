@@ -1,0 +1,16 @@
+services:
+  redflag-api:
+    build:
+      context: ./apps/api
+    environment:
+      REDFLAG_DATABASE_PATH: /data/redflag.sqlite3
+      REDFLAG_API_KEY: redflag-dev-key
+      REDFLAG_AUTO_APPROVE_REPORTS: "true"
+    ports:
+      - "8080:8080"
+    volumes:
+      - redflag-data:/data
+    command: ["redflag-api", "serve", "--host", "0.0.0.0", "--port", "8080"]
+
+volumes:
+  redflag-data:
